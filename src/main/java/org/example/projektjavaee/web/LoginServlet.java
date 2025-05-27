@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 
             // Przekierowanie wg roli
             String role = user.getRole().getName();
-            if ("ADMIN".equalsIgnoreCase(role)) {
+            if ("ADMIN".equalsIgnoreCase(role) || "WORKER".equalsIgnoreCase(role)) {
                 resp.sendRedirect("admin/dashboard.jsp");
             } else if ("CLIENT".equalsIgnoreCase(role)) {
                 resp.sendRedirect("client/shop");

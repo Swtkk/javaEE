@@ -19,7 +19,7 @@ public class ClientAuthFilter implements Filter {
         if (session != null && session.getAttribute("user") != null) {
             User user = (User) session.getAttribute("user");
 
-            if ("CLIENT".equalsIgnoreCase(user.getRole().getName()) || "ADMIN".equalsIgnoreCase(user.getRole().getName())) {
+            if ("CLIENT".equalsIgnoreCase(user.getRole().getName()) || "WORKER".equalsIgnoreCase(user.getRole().getName()) || "ADMIN".equalsIgnoreCase(user.getRole().getName())) {
                 chain.doFilter(request, response);
                 return;
             }

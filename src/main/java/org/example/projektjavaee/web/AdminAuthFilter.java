@@ -17,7 +17,7 @@ public class AdminAuthFilter implements Filter {
         HttpSession session = req.getSession(false);
         if (session != null && session.getAttribute("user") != null) {
             User user = (User) session.getAttribute("user");
-            if ("ADMIN".equalsIgnoreCase(user.getRole().getName())) {
+            if ("ADMIN".equalsIgnoreCase(user.getRole().getName()) || "WORKER".equalsIgnoreCase(user.getRole().getName())) {
                 chain.doFilter(request, response);
                 return;
             }

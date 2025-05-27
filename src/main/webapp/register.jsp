@@ -9,6 +9,7 @@
     Rola:
     <select name="role">
         <option value="CLIENT">Klient</option>
+        <option value="WORKER">Pracownik</option>
         <option value="ADMIN">Administrator</option>
     </select><br>
     <input type="submit" value="Zarejestruj">
