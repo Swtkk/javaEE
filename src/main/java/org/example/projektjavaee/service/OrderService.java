@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderService {
-    void placeOrder(User user, Map<Product, Integer> cart);
+    void placeOrder(User user, Map<Product, Integer> cart, String email);
     List<Order> getUserOrders(User user);
 }

@@ -41,6 +41,8 @@
 </table>
 
 <form method="post" action="../order">
+    <label>Adres e-mail do potwierdzenia:</label><br>
+    <input type="email" name="email" required><br><br>
     <input type="submit" value="Złóż zamówienie">
 </form>
 <%

@@ -20,7 +20,6 @@ public class Order implements Serializable {
     private List<OrderItem> items = new ArrayList<>();
 
 
-
     public Order(List<OrderItem> items) {
         this.items = items;
     }

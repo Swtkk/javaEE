@@ -7,7 +7,6 @@ import org.example.projektjavaee.model.Order;
 import org.example.projektjavaee.model.OrderItem;
 import org.example.projektjavaee.model.Product;
 import org.example.projektjavaee.model.User;
-import org.example.projektjavaee.service.OrderService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +16,10 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService {
     @Inject
     private OrderDAO orderDAO;
+    @Inject
+    private MailService mailService;
 
-    public void placeOrder(User user, Map<Product, Integer> cart) {
+    public void placeOrder(User user, Map<Product, Integer> cart, String email) {
         Order order = new Order();
         order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
@@ -36,6 +37,9 @@ public class OrderServiceImpl implements OrderService {
         }
 
         orderDAO.create(order);
+        order.getItems().size(); // wymuszenie załadowania listy
+        mailService.sendOrderConfirmation(email, order);
+
     }
 
     public List<Order> getUserOrders(User user) {

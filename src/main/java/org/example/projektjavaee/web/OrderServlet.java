@@ -22,15 +22,15 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("user");
+        String email = req.getParameter("email");
 
         Map<Product, Integer> cart = (Map<Product, Integer>) session.getAttribute("cart");
 
         if (cart != null && !cart.isEmpty()) {
-            orderService.placeOrder(user, cart);
+            orderService.placeOrder(user, cart, email);
             session.removeAttribute("cart");
-            session.setAttribute("flash", "Zamówienie zostało złożone pomyślnie!");
+            session.setAttribute("flash", "Zamówienie zostało złożone pomyślnie i wysłane na e-mail: " + email);
             resp.sendRedirect("client/shop");
-
         } else {
             resp.sendRedirect("client/cart.jsp?error=empty");
         }
