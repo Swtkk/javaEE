@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             if ("ADMIN".equalsIgnoreCase(role)) {
                 resp.sendRedirect("admin/dashboard.jsp");
             } else if ("CLIENT".equalsIgnoreCase(role)) {
-                resp.sendRedirect("client/shop.jsp");
+                resp.sendRedirect("client/shop");
             } else {
                 resp.sendRedirect("home.jsp");
             }

@@ -8,7 +8,8 @@
 <body>
 <h1>Witaj w sklepie internetowym</h1>
 <a href="login.jsp">Logowanie</a> | <a href="register.jsp">Rejestracja</a>
-<a href="client/shop.jsp">Przejdź do sklepu</a>
+<a href="${pageContext.request.contextPath}/client/shop">Przejdz do sklepu</a>
+
 
 <% if (user != null) { %>
 <p>Zalogowano jako: <%= user.getUsername() %> (<%= user.getRole().getName() %>)</p>
