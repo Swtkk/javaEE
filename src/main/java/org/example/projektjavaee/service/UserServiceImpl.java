@@ -9,7 +9,7 @@ import org.example.projektjavaee.model.User;
 @Stateless
 public class UserServiceImpl implements UserService {
     @Inject
-    private UserDAO userDAO;
+    UserDAO userDAO;
     public User login(String username, String password) {
         try {
             User user = userDAO.findByUsername(username);

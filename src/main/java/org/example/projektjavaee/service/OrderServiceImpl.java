@@ -15,9 +15,9 @@ import java.util.Map;
 @Stateless
 public class OrderServiceImpl implements OrderService {
     @Inject
-    private OrderDAO orderDAO;
+    OrderDAO orderDAO;
     @Inject
-    private MailService mailService;
+    MailService mailService;
 
     public void placeOrder(User user, Map<Product, Integer> cart, String email) {
         Order order = new Order();

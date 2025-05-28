@@ -11,7 +11,7 @@ import java.util.List;
 @Stateless
 public class ProductServiceImpl implements ProductService {
     @Inject
-    private ProductDAO productDAO;
+    ProductDAO productDAO;
     public void addProduct(Product p) { productDAO.create(p); }
     public List<Product> getAllProducts() { return productDAO.findAll(); }
     @PostConstruct
