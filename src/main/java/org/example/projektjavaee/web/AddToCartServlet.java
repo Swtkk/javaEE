@@ -11,6 +11,7 @@ import org.example.projektjavaee.model.Product;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @WebServlet("/add-to-cart")
@@ -19,21 +20,39 @@ public class AddToCartServlet extends HttpServlet {
     @Inject
     private ProductDAO productDAO;
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Long productId = Long.parseLong(req.getParameter("productId"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        Long productId = Long.parseLong(request.getParameter("productId"));
+
+        // zakładam że masz serwis lub DAO do pobierania produktu
         Product product = productDAO.find(productId);
 
-        HttpSession session = req.getSession();
         Map<Product, Integer> cart = (Map<Product, Integer>) session.getAttribute("cart");
+
         if (cart == null) {
-            cart = new HashMap<>();
+            cart = new LinkedHashMap<>();
+            session.setAttribute("cart", cart);
         }
 
-        cart.put(product, cart.getOrDefault(product, 0) + 1);
-        session.setAttribute("cart", cart);
+        // Szukamy czy już istnieje taki produkt w mapie
+        Product existing = null;
+        for (Product p : cart.keySet()) {
+            if (p.getId().equals(product.getId())) {
+                existing = p;
+                break;
+            }
+        }
 
-        resp.sendRedirect("client/shop");
+        if (existing != null) {
+            cart.put(existing, cart.get(existing) + 1); // zwiększamy ilość
+        } else {
+            cart.put(product, 1); // nowy wpis
+        }
+
+        session.setAttribute("flash", "Produkt został dodany do koszyka.");
+        response.sendRedirect("client/shop");
     }
+
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);

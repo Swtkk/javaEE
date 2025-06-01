@@ -1,19 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head><title>Logowanie</title></head>
+<head>
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+</head>
 <body>
-<h2>Logowanie</h2>
-<form method="post" action="login">
-    Login: <input type="text" name="username" required><br>
-    Hasło: <input type="password" name="password" required><br>
-    <input type="submit" value="Zaloguj">
-</form>
-<button>
-    <a href="register.jsp">Zarejestruj sie</a>
+<div class="container">
+    <h2>Logowanie</h2>
+    <form method="post" action="login">
+        <input type="text" name="username" placeholder="Login" required>
+        <input type="password" name="password" placeholder="Hasło" required>
+        <input type="submit" value="Zaloguj">
+    </form>
 
-</button>
-<c:if test="${param.error == 'true'}">
-    <p style="color:red">Niepoprawny login lub hasło!</p>
-</c:if>
+    <a href="register.jsp" class="button-link">Zarejestruj się</a>
+
+    <c:if test="${param.error == 'true'}">
+        <p style="color:red">Niepoprawny login lub hasło!</p>
+    </c:if>
+</div>
 </body>
 </html>
